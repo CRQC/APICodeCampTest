@@ -9,6 +9,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using Autofac;
 using Autofac.Integration.WebApi;
+using AutoMapper;
 
 namespace TheCodeCamp
 {

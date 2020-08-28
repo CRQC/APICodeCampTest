@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Serialization;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
@@ -12,14 +13,19 @@ namespace TheCodeCamp
       // Web API configuration and services
       AutofacConfig.Register();
 
+     // changing casing of json.
+      config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+
+
       // Web API routes
       config.MapHttpAttributeRoutes();
-
-      config.Routes.MapHttpRoute(
-          name: "DefaultApi",
-          routeTemplate: "api/{controller}/{id}",
-          defaults: new { id = RouteParameter.Optional }
-      );
+     
+      //hidding basic general routing 
+      //config.Routes.MapHttpRoute(
+      //    name: "DefaultApi",
+      //    routeTemplate: "api/{controller}/{id}",
+      //    defaults: new { id = RouteParameter.Optional }
+      //);
     }
   }
 }
