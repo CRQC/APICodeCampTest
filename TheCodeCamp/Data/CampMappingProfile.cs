@@ -12,8 +12,14 @@ namespace TheCodeCamp.Data
 
         public CampMappingProfile()
         {
-            //CreateMap<Camp, CampModel>().ForMember(x => x.Venue, opt => opt.MapFrom(m => m.Location.VenueName));
-            CreateMap<Camp, CampModel>();
+            //CreateMap<Camp, CampModel>()
+            //    .ForMember(x => x.Venue, opt => opt.MapFrom(m => m.Location.VenueName))
+            //    .ReverseMap();
+            
+            CreateMap<Camp, CampModel>().ReverseMap();
+
+            CreateMap<Talk, TalkModel>();
+            CreateMap<Speaker, SpeakerModel>();
         }
 
     }
