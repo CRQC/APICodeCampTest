@@ -1,9 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+
 
 namespace TheCodeCamp.Models
 {
@@ -17,6 +18,9 @@ namespace TheCodeCamp.Models
         public DateTime EventDate { get; set; } = DateTime.MinValue;
         [Required]
         [Range(1, 30)]
+        public string Name { get; set; }
+        public string Moniker { get; set; }
+        public DateTime EventDate { get; set; } = DateTime.MinValue;
         public int Length { get; set; } = 1;
 
         public ICollection<TalkModel> Talks { get; set; }
@@ -28,7 +32,6 @@ namespace TheCodeCamp.Models
         public string LocationStateProvince { get; set; }
         public string LocationPostalCode { get; set; }
         public string LocationCountry { get; set; }
-
 
     }
 }

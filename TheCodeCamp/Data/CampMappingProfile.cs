@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +20,7 @@ namespace TheCodeCamp.Data
 
             CreateMap<Talk, TalkModel>();
             CreateMap<Speaker, SpeakerModel>();
+            //CreateMap<Camp, CampModel>().ForMember(x => x.Venue, opt => opt.MapFrom(m => m.Location.VenueName));
         }
 
     }
