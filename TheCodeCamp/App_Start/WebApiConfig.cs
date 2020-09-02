@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Serialization;
+﻿using Microsoft.Web.Http;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,15 +11,23 @@ namespace TheCodeCamp
   {
     public static void Register(HttpConfiguration config)
     {
-      // Web API configuration and services
-      AutofacConfig.Register();
+     // Web API configuration and services
+     AutofacConfig.Register();
+            
+     config.AddApiVersioning(cfg =>
+     {
+         cfg.DefaultApiVersion = new ApiVersion(1, 1);
+         cfg.AssumeDefaultVersionWhenUnspecified = true;
+         cfg.ReportApiVersions = true;
+     });
+
 
      // changing casing of json.
-      config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+     config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 
 
-      // Web API routes
-      config.MapHttpAttributeRoutes();
+     // Web API routes
+     config.MapHttpAttributeRoutes();
      
       //hidding basic general routing 
       //config.Routes.MapHttpRoute(
