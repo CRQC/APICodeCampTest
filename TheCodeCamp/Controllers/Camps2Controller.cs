@@ -11,16 +11,15 @@ using TheCodeCamp.Models;
 
 namespace TheCodeCamp.Controllers
 {
-    [ApiVersion("1.0")]
-    [ApiVersion("1.1")]
+    [ApiVersion("2.0")]
     [RoutePrefix("api/camps")]
-    //[RoutePrefix("api/v{version}/camps")]
-    public class CampsController : ApiController
+    //[RoutePrefix("api/v{version:apiVersion}/camps")]
+    public class Camps2Controller : ApiController
     {
         private readonly ICampRepository _repository;
         private readonly IMapper _mapper;
 
-        public CampsController(ICampRepository repository, IMapper mapper)
+        public Camps2Controller(ICampRepository repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
@@ -51,14 +50,11 @@ namespace TheCodeCamp.Controllers
                 //Todo add logging.
                 return InternalServerError(ex);
             }
-
-            //adding a static value
-            //return Ok(new { Name = "Shawn", Occupation = "Teacher" });
         }
 
         //if no routing is done. [Route("api/camps/{Moniker}")]
-        [MapToApiVersion("1.0")]
-        [Route("{Moniker}")]
+        //[MapToApiVersion("2.0")]
+        [Route("{Moniker}", Name = "GetCamp20")]
         public async Task<IHttpActionResult> Get(string moniker, bool includeTalks = false) {
 
             try
@@ -68,7 +64,7 @@ namespace TheCodeCamp.Controllers
                 {
                     return NotFound();
                 }
-                return Ok(_mapper.Map<CampModel>(result));
+                return Ok( new { success =  true, camp = _mapper.Map<CampModel>(result)});  //Ok(_mapper.Map<CampModel>(result));
             }
             catch (Exception ex)
             {
